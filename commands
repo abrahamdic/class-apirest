@@ -14,6 +14,9 @@ curl -X 'PUT' http://localhost:8000/books/1 -d '{ "titulo":"Nuevo Libro x", "id_
 curl -X 'DELETE' http://localhost:8000/books/1
 
 
-// AUTHENTICATION
-
+// AUTHENTICATION PHP BASIC
 curl http://abraham:abc@localhost:8000/books/1
+
+
+// AUTHENTICATION HMAC
+curl http://localhost:8000/books -H 'X-HASH: 45d0bc13b81e6a9f53fec8b80b5525c30487b2bd' -H 'X-UID: 1' -H 'X-TIMESTAMP: 1566172227'
