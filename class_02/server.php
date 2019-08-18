@@ -1,4 +1,10 @@
 <?php
+$user = array_key_exists( 'PHP_AUTH_USER', $_SERVER ) ? $_SERVER['PHP_AUTH_USER'] : '';
+$password = array_key_exists( 'PHP_AUTH_PW', $_SERVER ) ? $_SERVER['PHP_AUTH_PW'] : '';
+
+if ( $user !== 'abraham' || $password !== 'abc' ) {
+    die;
+}
 
 $allowResourceTypes = [
     'books',
@@ -42,19 +48,29 @@ switch ( strtoupper($_SERVER['REQUEST_METHOD']) ) {
             echo json_encode($books);
         } else {
             if ( array_key_exists($resourceId, $books) ) {
-                echo json_encode( $books[ $resourceId ] );
-            }    
+                echo json_encode( $books[ $resourceId ] ) . PHP_EOL;
+            }
         }
-        
         break;
     case 'POST':
         $json = file_get_contents('php://input');
         $books[] = json_decode($json, true);
         //echo array_keys($books)[ count($books) - 1];
-        echo json_encode($books);
+        echo json_encode($books) . PHP_EOL ;
         break;
     case 'PUT':
-        break; 
+        if ( !empty($resourceId) && array_key_exists( $resourceId, $books ) ) {
+            $json = file_get_contents('php://input');
+            $books[ $resourceId ] = json_decode( $json, true );
+            echo json_encode($books) . PHP_EOL;
+        }
+        break;
+    case 'DELETE':
+        if ( !empty($resourceId) && array_key_exists( $resourceId, $books ) ) {
+            unset($books[ $resourceId ]);
+            echo json_encode( $books ) . PHP_EOL;
+        }
+        
     default:
         # code...
         break;

@@ -1,0 +1,19 @@
+// Crear servidor
+php -S localhost:8000 router.php
+
+// GET
+curl http://localhost:8000/books/1
+
+// POST
+curl -X 'POST' http://localhost:8000/books/1 -d '{ "titulo":"Nuevo Libro", "id_author": 1, "id_genero": 3 }'
+
+// UPDATE
+curl -X 'PUT' http://localhost:8000/books/1 -d '{ "titulo":"Nuevo Libro x", "id_author": 10, "id_genero": 29 }'
+
+//DELETE
+curl -X 'DELETE' http://localhost:8000/books/1
+
+
+// AUTHENTICATION
+
+curl http://abraham:abc@localhost:8000/books/1
