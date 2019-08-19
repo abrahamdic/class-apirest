@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
-        <table class="table table-response" id="booksTable">
+        <table class="table" id="booksTable">
             <thead>
                 <tr>
                     <th>Titulo</th>
@@ -60,13 +60,11 @@
                 $('#message').show();
                 $.ajax(
                     {
-                        'url': 'http://localhost:8002/books',
+                        'url': 'http://localhost:8000/books',
                         'success': function( data ) {
-                            console.log(data);
                             $('#messages').hide();
                             $('#booksTable > tbody').empty();
                             for ( b in data) {
-                                console.log(data[b]);
                                 addBook( data[b] );
                             }
                             $('#bookForm').show();
@@ -77,6 +75,24 @@
             function addBook( book ) {
                 $('#booksTable tr:last').after('<tr><td>' + book.titulo + '</td><<td>' + book.id_autor + '</td><td>' + book.id_genero + '</td></tr>');
             }
+            $('#bookSave').click( function() {
+                var newBook = {
+                    'titulo': $('#bookTitle').val(),
+                    'id_autor': $('#bookAuthorId').val(),
+                    'id_genero': $('#bookGenreId').val()
+                }
+                $('#messages').first('p').text('Guardando Libro ...');
+                $('#messages').show();
+                $.ajax({
+                    'url': 'http://localhost:8000/books',
+                    'method': 'POST',
+                    'data': JSON.stringify(newBook),
+                    'success': function(data) {
+                        $('#messages').hide();
+                        addBook(newBook);
+                    }
+                });
+            });
         </script>
     </body>
 </html>
