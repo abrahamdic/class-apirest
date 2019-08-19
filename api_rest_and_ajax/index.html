@@ -60,7 +60,7 @@
                 $('#message').show();
                 $.ajax(
                     {
-                        'url': 'http://localhost:8000/books',
+                        'url': window.location.href + (window.location.href.substr(window.location.href.lenght - 1) == '/' ? '' : '/') + 'books',
                         'success': function( data ) {
                             $('#messages').hide();
                             $('#booksTable > tbody').empty();
@@ -84,7 +84,7 @@
                 $('#messages').first('p').text('Guardando Libro ...');
                 $('#messages').show();
                 $.ajax({
-                    'url': 'http://localhost:8000/books',
+                    'url': window.location.href + (window.location.href.substr(window.location.href.lenght - 1) == '/' ? '' : '/') + 'books',
                     'method': 'POST',
                     'data': JSON.stringify(newBook),
                     'success': function(data) {
