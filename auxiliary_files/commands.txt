@@ -21,3 +21,10 @@ curl http://abraham:abc@localhost:8000/books/1
 
 // AUTHENTICATION HMAC
 curl http://localhost:8000/books -H 'X-HASH: 45d0bc13b81e6a9f53fec8b80b5525c30487b2bd' -H 'X-UID: 1' -H 'X-TIMESTAMP: 1566172227'
+
+
+// SERVIDOR DE AUTHENTICATION
+php -S localhost:8001 auth_server.php
+
+// OBTENER TOKEN
+curl http://localhost:8001  -X 'POST' -H 'X-Client-Id: 1' -H 'X-Secret:SuperSecreto!'
