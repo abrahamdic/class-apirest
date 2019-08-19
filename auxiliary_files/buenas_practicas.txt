@@ -1,0 +1,9 @@
+Felicitaciones has llegado al final del curso, ahora conoces todos los tecnicismos para generar una API RESTful. Recuerda seguir las buenas prácticas:
+Siempre utiliza sustantivos para nombrar tus recursos.
+Añade los nombres en plural para las urls.
+Las modificaciones a recursos deben hacerse con su verbo HTTP correspondiente: POST, PUT o DELETE.
+Para devolver recursos asociados a otro recurso utiliza url que incorporen subrecursos: /Autos/1/Choferes.
+Navegabilidad vía vínculos.
+Cuando devuelvas colecciones deben ser filtrables, ordenables y paginables.
+Versiona tu API, añade el número de versión en la url: v1/Autos.
+No olvides tomar el examen para evaluar tus conocimientos y dejar una review del curso.
